@@ -10,7 +10,7 @@ $numbers=array(
 );
 */
 
-$file=file_get_contents('input1.txt');
+$file=file_get_contents(dirname(__FILE__). '/input1.txt');
 
 $numbers=explode ("\n",$file);
 
