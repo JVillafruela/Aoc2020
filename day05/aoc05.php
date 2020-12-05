@@ -9,18 +9,43 @@ if ($file===false) {
 
 $count=0;
 $maxid=0;
+$seats=array();
 while (($line = fgets($file)) !== false) {
     $line=trim($line);
     if (strlen($line)==10) {
         $id=get_id($line);
-        print "DDD $line => $id \n";
+        //print "DDD $line => $id \n";
         if ($id>$maxid) $maxid=$id;
+        $seats[]=$id;
         $count++;
     }
 }
 fclose($file);
+print "Answer 1 = $maxid ($count lines) \n";
 
-print "Answer $maxid ($count lines) \n";
+sort($seats);
+
+$missing=array();
+$min=get_id('FFFFFFFLLL'); // id 0
+$max=get_id('BBBBBBBRRR'); // id 1023
+for($i=$min;$i<=$max;$i++) {
+    if (array_search($i,$seats) === false) {
+        $missing[]=$i;
+    }
+}
+
+//print_r($missing);
+foreach($missing as $id) {
+    $ok1=array_search($id-1,$seats) !== false;
+    if (!$ok1) continue;
+    $ok2=array_search($id+1,$seats) !== false;
+    if (!$ok2) continue;
+    print "Answer2 Seat ID = $id\n";
+}
+
+
+
+
 
 
 /*
@@ -120,4 +145,26 @@ function tests() {
     assert(get_id('BFFFBBFRRR')==567);
     assert(get_id('FFFBBBFRRR')==119);
     assert(get_id('BBFFBBFRLL')==820);
+}
+
+/*
+FFFFFFFLLL row 0   column 0 id 0
+FFFFFFFRRR row 0   column 7 id 7
+BBBBBBBLLL row 127 column 0 id 1016
+BBBBBBBRRR row 127 column 7 id 1023
+*/
+function info1() {
+
+    $seats=array(
+        'FFFFFFFLLL',
+        'FFFFFFFRRR',
+        'BBBBBBBLLL',
+        'BBBBBBBRRR'
+    );
+    foreach($seats as $seat) {
+        $id=get_id($seat);
+        $row=get_row($seat);
+        $column=get_column($seat);
+        print "$seat row $row column $column id $id\n";
+    }
 }
