@@ -69,15 +69,15 @@ function get_row($seat) {
     for($i=0;$i<7;$i++) {
         $letter=$seat[$i];
         //print("DDD $i $letter $min,$max\n");
-        $range=$max-$min;
+        $range=$max-$min+1;
         $middle=intdiv($range, 2);
         //print("DDD range $range middle $middle\n"); 
         if ($letter=='F') {
-            $max=$min+$middle; 
+            $max=$min+$middle-1; 
             //print("DDD max => $max\n");  
         }
         if ($letter=='B') {
-            $min=$min+$middle+1;
+            $min=$min+$middle;
             //print("DDD min => $min\n");  
         }        
 
@@ -100,15 +100,15 @@ function get_column($seat) {
     for($i=7;$i<10;$i++) {
         $letter=$seat[$i];
         //print("DDD $i $letter $min,$max\n");
-        $range=$max-$min;
+        $range=$max-$min+1;
         $middle=intdiv($range, 2);
         //print("DDD range $range middle $middle\n"); 
         if ($letter=='L') {
-            $max=$min+$middle; 
+            $max=$min+$middle-1; 
             //print("DDD max => $max\n");  
         }
         if ($letter=='R') {
-            $min=$min+$middle+1;
+            $min=$min+$middle;
             //print("DDD min => $min\n");  
         }        
     }
