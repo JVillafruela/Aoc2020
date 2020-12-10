@@ -29,7 +29,7 @@ function answer1($numbers,$len) {
             }
         }
         if ($ok==false) {
-            print "DDD answer $target \n";
+            print "DDD answer1 $target \n";
             return $target;
         }
     }
